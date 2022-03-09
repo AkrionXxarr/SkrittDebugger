@@ -1,0 +1,167 @@
+{
+	"name": "skritt-debugger",
+	"displayName": "Skritt Debugger",
+	"description": "Duktape debugger extension for Typescript",
+	"version": "1.5.12",
+	"icon": "icon/skritt_debugger.png",
+	"author": "Stephen Bloomquist",
+	"publisher": "arenanettechops",
+	"license": "BSD-3-Clause",
+	"engines": {
+		"vscode": "^1.23.0",
+		"node": "^6.5.0"
+	},
+	"categories": [
+		"Debuggers"
+	],
+	"keywords": [
+		"duktape",
+		"debugger",
+		"typescript"
+	],
+	"files": [
+		"out/**"
+	],
+	"activationEvents": [
+		"*",
+		"onCommand:skritt.enableAutoAttach",
+		"onCommand:skritt.disableAutoAttach"
+	],
+	"main": "./out/extension",
+	"contributes": {
+		"breakpoints": [
+			{
+				"language": "typescript"
+			}
+		],
+		"commands": [
+			{
+				"command": "skritt.enableAutoAttach",
+				"title": "Skritt: Enable Auto Attach"
+			},
+			{
+				"command": "skritt.disableAutoAttach",
+				"title": "Skritt: Disable Auto Attach"
+			}
+		],
+		"configuration": {
+			"title": "Skritt Debugger",
+			"properties": {
+				"skritt.enableAutoAttachOnStart": {
+					"type": "boolean",
+					"default": true,
+					"description": "Start VSCode with auto-attach enabled."
+				}
+			}
+		},
+		"debuggers": [
+			{
+				"type": "skritt-debugger",
+				"label": "Skritt Debugger",
+				"program": "./out/client/debugger.js",
+				"runtime": "node",
+				"languages": [
+					"typescript"
+				],
+				"configurationSnippets": [
+					{
+						"label": "Skritt Debugger",
+						"description": "Default config options for Skritt Debugger",
+						"body": {
+							"name": "Skritt Debugger",
+							"type": "skritt-debugger",
+							"request": "attach",
+							"address": "localhost",
+							"port": 9091,
+							"localRoot": "^\"\\${workspaceRoot}\"",
+							"sourceRoot": "asset",
+							"stopOnEntry": false,
+							"validateVersion": false,
+							"supportsCachedBreakpoints": true,
+							"debugLogLevel": 0,
+							"showDebugVariables": false
+						}
+					}
+				],
+				"configurationAttributes": {
+					"attach": {
+						"properties": {
+							"address": {
+								"type": "string",
+								"description": "TCP/IP address on which the debug server is listening. Default is 'localhost'",
+								"default": "localhost"
+							},
+							"port": {
+								"type": "number",
+								"description": "Debug port to attach to. Default is 9091.",
+								"default": 9091
+							},
+							"localRoot": {
+								"type": "string",
+								"description": "VSCode's root directory",
+								"default": "${workspaceRoot}"
+							},
+							"sourceRoot": {
+								"type": "string",
+								"description": "Root directory for source files.\nIf empty, local root is used.\nIf full path, sourceRoot is used.\nIf directory name, local root is scanned for first occurance.",
+								"default": "asset"
+							},
+							"stopOnEntry": {
+								"type": "boolean",
+								"description": "Automatically stops program after launch.",
+								"default": false
+							},
+							"validateVersion": {
+								"type": "boolean",
+								"description": "Validate the debugger version with the target.",
+								"default": true
+							},
+							"supportsCachedBreakpoints": {
+								"type": "boolean",
+								"description": "The debugger will cache unverified breakpoints so they can be set at a later time once notified by the target.",
+								"default": true
+							},
+							"debugLogLevel": {
+								"type": "number",
+								"description": "Sets debug log level. (0 = Standard logs only, 1 = Warnings, 2 = Standard debug logs, 3 = Duktape comm logs)",
+								"default": 0
+							},
+							"showDebugVariables": {
+								"type": "boolean",
+								"description": "Adds '__' prefixed variables such as __artificials to the variables list",
+								"default": false
+							}
+						}
+					}
+				}
+			}
+		]
+	},
+	"scripts": {
+		"vscode:prepublish": "tsc -p ./src",
+		"compile": "node ./node_modules/typescript/bin/tsc -p ./src",
+		"watch": "node ./node_modules/typescript/bin/tsc -w -p ./src",
+		"postinstall": "node ./node_modules/vscode/bin/install",
+		"test": "node ./node_modules/vscode/bin/test"
+	},
+	"devDependencies": {
+		"@types/node": "^7.0.4",
+		"gulp": "^3.9.1",
+		"gulp-typescript": "^3.2.3",
+		"typescript": "^2.1.5",
+		"vscode": "^1.1.9"
+	},
+	"dependencies": {
+		"process": "^0.11.9",
+		"utf8": "^2.1.2",
+		"util": "^0.10.3",
+		"typescript": "^2.1.5",
+		"vscode-debugadapter": "1.29.0",
+		"vscode-debugprotocol": "1.29.0"
+	},
+	"__metadata": {
+		"id": "8120f8db-c9a4-49bc-807c-167ceb893fdd",
+		"publisherId": "7d20bdd0-931d-4efb-b497-c8e4a9c68486",
+		"publisherDisplayName": "ArenaNet"
+	}
+}
