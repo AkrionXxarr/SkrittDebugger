@@ -1,5 +1,5 @@
 # SkrittDebugger
-A somewhat specialized Duktape debugger extension for VSCode that I wrote and maintained while working at ArenaNet. It was originally written in Typescript; this is the transpiled javascript (after some cleanup by me) that can be obtained via the VSCode extension.
+A somewhat specialized Duktape debugger extension for VSCode that I wrote and maintained while working at ArenaNet ([Skritt Debugger](https://marketplace.visualstudio.com/items?itemName=arenanettechops.skritt-debugger)). It was originally written in Typescript; this is the transpiled javascript (after some cleanup by me) that can be obtained via the VSCode extension.
 
 Some of the challenges involved dealing with the highly asynchronous nature of TCP communication which is how the debugger talked with Duktape.
 
